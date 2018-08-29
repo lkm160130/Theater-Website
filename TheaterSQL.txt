@@ -1,0 +1,257 @@
+drop table movies;
+drop table namedescription;
+drop table reservation;
+drop table theaters;
+drop table zips;
+
+create table zips(
+id_pk Bigint,
+zipcode varChar(5),
+
+primary key(id_pk)
+);
+
+create table namedescription(
+id_pk Bigint,
+movietitle varChar(100),
+moviedescription varChar(10000),
+
+primary key(id_pk)
+);
+
+create table reservation(
+id_pk Bigint Not Null GENERATED ALWAYS AS IDENTITY,
+creditcardnumber varChar(16),
+firstname varChar(50),
+lastname varChar(50),
+moviename varChar(100),
+theatername varChar(100),
+theateraddress varChar(100),
+timex varChar(50),
+zipx varChar(5),
+seatnum varChar(5),
+
+primary key (id_pk)
+);
+
+create table theaters(
+id_pk Bigint,
+zipid_fk Bigint,
+name varChar(100),
+address varChar(100),
+
+primary key(id_pk),
+foreign key(zipid_fk) references Zips(id_pk)
+);
+
+create table movies(
+id_pk Bigint GENERATED ALWAYS AS IDENTITY,
+time varChar(50),
+namedescription_fk Bigint,
+theaterid_fk Bigint,
+
+primary key(id_pk),
+foreign key(namedescription_fk) references namedescription(id_pk),
+foreign key(theaterid_fk) references theaters(id_pk)
+);
+
+insert into zips(id_pk, zipcode)
+values(1, '75080');
+insert into zips(id_pk, zipcode)
+values(2, '76087');
+insert into zips(id_pk, zipcode)
+values(3, '77552');
+insert into zips(id_pk, zipcode)
+values(4, '72415');
+insert into zips(id_pk, zipcode)
+values(5, '75082');
+insert into zips(id_pk, zipcode)
+values(6, '76123');
+
+insert into theaters(id_pk, zipid_fk, name, address)
+values(1, 1, 'Belbank Cinema', '3183 O Conner Street');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(2, 1, 'Solaris Theater', '3381 Maryland Avenue');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(3, 1, 'Bury Films', '4869 Lynn Avenue');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(4, 2, 'Guthram Theater', '1957 Goldcliff Circle');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(5, 2, 'Stawford Cinema', '2542 Barrington Court');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(6, 2, 'Queenstown Cinemark', '2638 Poplar Lane');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(7, 3, 'Bellenau Cinema', '4134 Prospect Valley Road');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(8, 3, 'Ely Cinema', '2148 Parkview Drive');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(9, 4, 'Howe Theater', '3333 Todds Lane');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(10, 4, 'Shadowfen Cinema', '722 Flinderation Road');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(11, 5, 'Wellspring Theater', '1254 Webster Street');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(12, 5, 'Tunstead Films', '4274 Centennial Farm Road');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(13, 5, 'Sharpton Cinemark', '4727 Benson Park Drive');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(14, 6, 'Fernsworth Cinemax', '4607 Star Trek Drive');
+insert into theaters(id_pk, zipid_fk, name, address)
+values(15, 6, 'Belbank Cinema', '3432 Palmer Road');
+
+insert into namedescription(id_pk, movietitle, moviedescription)
+values(1, 'Mission: Impossible – Fallout', 'Ethan Hunt and the IMF team join forces with CIA assassin August Walker to prevent a disaster of epic proportions. Arms dealer John Lark and a group of terrorists known as the Apostles plan to use three plutonium cores for a simultaneous nuclear attack on the Vatican, Jerusalem and Mecca, Saudi Arabia. When the weapons go missing, Ethan and his crew find themselves in a desperate race against time to prevent them from falling into the wrong hands.');
+insert into namedescription(id_pk, movietitle, moviedescription)
+values(2, 'Mamma Mia! Here We Go Again', 'In 1979 young Donna, Tanya and Rosie graduate from Oxford University -- leaving Donna free to embark on a series of adventures throughout Europe. On her journeys, she makes the acquaintances of Harry, Bill and Sam -- the latter whom she falls in love with, but hes also the man who breaks her heart. In the present day, Donnas pregnant daughter, Sophie, dreams of renovating a taverna while reuniting with her mothers old friends and boyfriends on the Greek island of Kalokairi.');
+insert into namedescription(id_pk, movietitle, moviedescription)
+values(3, 'Hotel Transylvania 3: Summer Vacation', 'In Sony Pictures Animation’s Hotel Transylvania 3: Summer Vacation, join our favorite monster family as they embark on a vacation on a luxury monster cruise ship so Drac can take a summer vacation from providing everyone elses vacation at the hotel. It’s smooth sailing for Drac’s Pack as the monsters indulge in all of the shipboard fun the cruise has to offer, from monster volleyball to exotic excursions, and catching up on their moon tans. But the dream vacation turns into a nightmare when Mavis realizes Drac has fallen for the mysterious captain of the ship, Ericka, who hides a dangerous secret that could destroy all of monsterkind.');
+insert into namedescription(id_pk, movietitle, moviedescription)
+values(4, 'Teen Titans Go! To the Movies', 'It seems that all the major superheroes out there are starring in their own movies -- all but the Teen Titans. Robin is bound and determined to remedy that situation by becoming a star instead of a sidekick. With a few madcap ideas and a song in their hearts, the Teen Titans head to Hollywood to fulfill their dreams. Things soon go awry, however, when a supervillain plans to take over the planet -- putting the very fate of the young heroes on the line.');
+insert into namedescription(id_pk, movietitle, moviedescription)
+values(5, 'Ant-Man and the Wasp', 'Scott Lang is grappling with the consequences of his choices as both a superhero and a father. Approached by Hope van Dyne and Dr. Hank Pym, Lang must once again don the Ant-Man suit and fight alongside the Wasp. The urgent mission soon leads to secret revelations from the past as the dynamic duo finds itself in an epic battle against a powerful new enemy.');
+insert into namedescription(id_pk, movietitle, moviedescription)
+values(6, 'Incredibles 2', 'Everyone’s favorite family of superheroes is back in “Incredibles 2” – but this time Helen (voice of Holly Hunter) is in the spotlight, leaving Bob (voice of Craig T. Nelson) at home with Violet (voice of Sarah Vowell) and Dash (voice of Huck Milner) to navigate the day-to-day heroics of “normal” life. It’s a tough transistion for everyone, made tougher by the fact that the family is still unaware of baby Jack-Jack’s emerging superpowers. When a new villain hatches a brilliant and dangerous plot, the family and Frozone (voice of Samuel L. Jackson) must find a way to work together again—which is easier said than done, even when they’re all Incredible.');
+insert into namedescription(id_pk, movietitle, moviedescription)
+values(7, 'Skyscraper', 'Will Sawyer is a former FBI agent and U.S. war veteran who now assesses security for skyscrapers. While hes on assignment in China, the worlds tallest and safest building catches on fire -- and he gets framed for it. Now a wanted man and on the run, he must find those responsible, clear his name and somehow rescue his family members when they become trapped inside the inferno.');
+insert into namedescription(id_pk, movietitle, moviedescription)
+values(8, 'Jurassic World: Fallen Kingdom', 'Three years after the destruction of the Jurassic World theme park, Owen Grady and Claire Dearing return to the island of Isla Nublar to save the remaining dinosaurs from a volcano thats about to erupt. They soon encounter terrifying new breeds of gigantic dinosaurs, while uncovering a conspiracy that threatens the entire planet.');
+insert into namedescription(id_pk, movietitle, moviedescription)
+values(9, 'Christopher Robin', 'Winnie-the-Pooh and friends reunite with old pal Christopher Robin -- now an adult.');
+
+
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 1, 1);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('2:00pm', 2, 1);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('5:00pm', 4, 1);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('11:00am', 5, 1);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('8:00pm', 6, 1);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('4:00pm', 1, 2);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('1:00pm', 3, 2);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('10:00am', 4, 2);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('6:00pm', 5, 2);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 7, 2);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('1:00pm', 8, 2);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('9:00am', 9, 2);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('2:00pm', 2, 3);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('3:00pm', 3, 3);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('8:00pm', 4, 3);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('10:00pm', 7, 3);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 3, 4);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('8:00pm', 5, 4);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('4:00pm', 6, 4);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('1:00pm', 7, 4);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('10:00pm', 8, 4);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('1:00pm', 9, 4);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('11:00am', 1, 5);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('5:00pm', 2, 5);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 3, 5);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('1:00pm', 5, 5);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('11:00pm', 8, 5);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('2:00pm', 2, 6);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 4, 6);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('10:00am', 5, 6);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('8:00pm', 6, 6);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('11:00am', 7, 6);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('8:00am', 8, 6);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 9, 6);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('1:00pm', 8, 7);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('2:00pm', 3, 7);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 5, 7);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('11:00am', 1, 8);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('9:00pm', 6, 8);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('11:00am', 7, 8);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('8:00am', 8, 8);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('6:00pm', 9, 8);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('9:00pm', 2, 9);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('3:00pm', 3, 9);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 6, 9);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('11:00am', 9, 9);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('9:00pm', 5, 10);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('11:00am', 6, 10);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('8:00am', 8, 10);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 9, 10);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('11:00am', 1, 11);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('8:00am', 4, 11);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 9, 11);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('11:00am', 2, 12);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('8:00am', 3, 12);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 8, 12);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 9, 12);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('8:00am', 3, 13);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('11:00am', 8, 13);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 9, 13);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('10:00am', 1, 14);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('9:00am', 5, 14);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 6, 14);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('1:00pm', 6, 15);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('6:00pm', 8, 15);
+insert into movies(time, namedescription_fk, theaterid_fk)
+values('7:00pm', 9, 15);
+
+
+
+
