@@ -1,7 +1,7 @@
 Written By: Logan Moon
 Course: CS 4336.0U1
 Email: lkm160130@utdallas.edu
-Summer 2018
+Semester: 2018 Summer
 
 Overview: This README covers Final Project for Prof. Greg Ozbir's Advanced Java class at UT Dallas. It will go over the 
   individual files of the project and their purpose within the the project as a whole.
